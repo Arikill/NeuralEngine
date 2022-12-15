@@ -4,3 +4,4 @@
 #include <random>
 #include <algorithm>
 #include "timeseries.h"
+#include "synapse.h"
