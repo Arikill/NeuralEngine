@@ -4,12 +4,12 @@
 #define _TIMESERIES_H
 
 template <class T>
-class timeseries {
+class Timeseries {
 public:
     T tstart;
     T tend;
     T fs;
-    timeseries(T tstart, T tend, T fs) {
+    Timeseries(T tstart, T tend, T fs) {
         this->tstart = tstart;
         this->tend = tend;
         this->fs = fs;

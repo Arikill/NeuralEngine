@@ -4,7 +4,7 @@
 #define _SYNAPSE_H
 
 template <class T>
-class synapse {
+class Synapse {
 public:
     T tau;
     T gain;
@@ -12,7 +12,7 @@ public:
     T Erev;
     T refrc;
 
-    synapse(T tau, T gain, T fs, T Erev, T refrc) {
+    Synapse(T tau, T gain, T fs, T Erev, T refrc) {
         this->tau = tau;
         this->gain = gain;
         this->fs = fs;

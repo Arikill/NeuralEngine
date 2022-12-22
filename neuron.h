@@ -4,18 +4,22 @@
 #define _NEURON_H
 
 template<class T>
-class neuron {
+class Neuron {
 public:
     T C;
     T R;
     T Er;
     T V;
+    Synapse<T> SynE;
+    Synapse<T> SynI;
 
-    neuron(T C, T R, T Er, T V) {
+    Neuron(T C, T R, T Er, T V, Synapse<T> SynE, Synapse<T> SynI) {
         this->C = C;
         this->R = R;
         this->Er = Er;
         this->V = V;
+        this->SynE = SynE;
+        this->SynI = SynI;
     }
 };
 
