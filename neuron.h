@@ -9,7 +9,7 @@ public:
     T C;
     T R;
     T Er;
-    T V;
+    std::vector<T> V;
     Synapse<T> SynE;
     Synapse<T> SynI;
 
@@ -17,9 +17,18 @@ public:
         this->C = C;
         this->R = R;
         this->Er = Er;
-        this->V = V;
+        this->V.resize(0);
         this->SynE = SynE;
         this->SynI = SynI;
+    }
+
+    propagate(std::vector<T> &Eevents, std::vector<T> &Ievents, std::vector<T> &times) {
+        auto ge = this->SynE->get_response(Eevents, times);
+        auto gi = this->SynI->get_response(Ievents, times);
+        if (times->size() != this->V.size()) {
+            this->V.resize(times->size(), static_cast<T>(0));
+        }
+        for(int i = 1; i < this->V.size())
     }
 };
 
