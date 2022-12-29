@@ -32,7 +32,7 @@ public:
         return filtered_times;
     }
 
-    std::vector<T> get_event_times(std::vector<int> &events) {
+    std::vector<T> get_event_times(std::vector<int> const &events) {
         int nevents = events.size();
         std::vector<T> event_times(nevents, 0.0);
         for(int i = 0; i < nevents; i++) {
