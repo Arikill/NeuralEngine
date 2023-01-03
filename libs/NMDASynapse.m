@@ -1,23 +1,25 @@
-classdef Synapse
+classdef NMDASynapse
     properties
         fs
         tau
         gain
         Erev
+        Et
         delay
         taup
     end
-
+    
     methods
-        function obj = Synapse(props)
+        function obj = NMDASynapse(props)
             obj.fs = props.fs;
             obj.tau = props.tau;
             obj.gain = props.gain;
             obj.Erev = props.Erev;
+            obj.Et = props.Et;
             obj.delay = props.delay;
             obj.taup = props.taup;
         end
-
+        
         function responses = alpha(obj, event_times, times)
             exponents = (times > event_times').*(times - event_times')./obj.tau;
             responses = exponents.*exp(1-exponents);
@@ -51,3 +53,4 @@ classdef Synapse
         end
     end
 end
+
