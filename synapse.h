@@ -6,18 +6,13 @@
 template <class T>
 class Synapse {
 public:
-    T tau;
-    T gain;
-    T fs;
-    T Erev;
-    T refrc;
+    Eigen::Matrix<T, 5, 1> params;
 
-    Synapse(T tau, T gain, T fs, T Erev, T refrc) {
-        this->tau = tau;
-        this->gain = gain;
-        this->fs = fs;
-        this->Erev = Erev;
-        this->refrc = refrc;
+    Synapse(T tau, T gain, T fs, T Erev, T rfrc) {
+        this->params(0, 0) = tau;
+        this->params(1, 0) = gain;
+        this->params(2, 0) = Erev;
+        this->params(3, 0) = rfrc;
     }
 
     void alpha(int ntimes, T event_time, std::vector<T> &times, std::vector<T> &output) {
@@ -34,10 +29,12 @@ public:
         int ntimes = times.size();
         auto event_times = this->get_event_times(events);
         int nevents = filtered_times.size();
+        Eigen::Matrix<T, nevents, ntimes> res;
+        
         std::vector<std::vector<T>> nres(nevents, std::vector<T>(ntimes, 0));
         std::vector<T> res(ntimes, 0.0);
         for(int n = 0; n < nevents; n++) {
-            this->alpha(filtered_times[n], times, ntimes, nres[n]);
+            this->alpha(ntimes, filtered_times[n], times, nres[n]);
         }
         for (int t = 0; t < ntimes; t++) {
             for (int n = 0; n < nevents; n++) {
