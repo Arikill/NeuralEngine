@@ -26,25 +26,15 @@ synI_properties.Erev = -70e-3;
 synI_properties.delay = 0.005;
 synI_properties.taup = 0.01;
 
-%% NMDA Synapse Properties
-synE2_properties = {};
-synE2_properties.fs = 1e4;
-synE2_properties.tau = 0.03;
-synE2_properties.gain = 1e-9;
-synE2_properties.Erev = -45e-3;
-synE2_properties.Et = -63e-3;
-synE2_properties.delay = 0.005;
-synE2_properties.taup = 0.01;
-
 %% Building a neuron
-neuron = Neuron(neuron_properties, synE_properties, synI_properties, synE2_properties);
+neuron = Neuron(neuron_properties, synE_properties, synI_properties);
 eventsE = sort(rand(1, 20));
 eventsI = sort(rand(1, 20));
 times = linspace(0, 1, 1e4);
-[res, neuron, ge, gi, gnmda] = neuron.propagate(-0e-9, eventsE, eventsI, times);
+[res, neuron, ge, gi, ~] = neuron.propagate(-0e-9, eventsE, eventsI, times);
 figure();
 tiledlayout(2, 1);
 nexttile;
 plot(times, neuron.V);
 nexttile;
-plot(times, ge, 'r', times, gi, 'b', times, gnmda, '--r');
+plot(times, ge, 'r', times, gi, 'b');

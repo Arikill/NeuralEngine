@@ -6,6 +6,7 @@ classdef Synapse
         Erev
         delay
         taup
+        Et
     end
 
     methods
@@ -16,6 +17,11 @@ classdef Synapse
             obj.Erev = props.Erev;
             obj.delay = props.delay;
             obj.taup = props.taup;
+            if isfield(props, 'Et')
+                obj.Et = Et;
+            else
+                obj.Et = [];
+            end
         end
 
         function responses = alpha(obj, event_times, times)
@@ -36,11 +42,6 @@ classdef Synapse
         function output = propagate(obj, event_times, times)
             responses = obj.alpha(event_times, times);
             responses = obj.gain.*responses;
-%             output = zeros(size(times));
-%             for i = 1: size(event_times, 2)
-%                 output = output + obj.taup.*responses(i, :);
-%             end
-%             output = obj.gain.*output;
             output = obj.gain.*normalize(mean(responses, 1), 'range');
             output = obj.time_delay(output);
         end

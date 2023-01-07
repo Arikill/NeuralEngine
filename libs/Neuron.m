@@ -24,7 +24,6 @@ classdef Neuron
             obj.Trfrc = props.Trfrc;
             obj.SynE = Synapse(synE_props);
             obj.SynI = Synapse(synI_props);
-%             obj.SynNMDA = NMDASynapse(nmda_props);
             if nargin >= 4
                 obj.SynNMDA = NMDASynapse(nmda_props);
             else
